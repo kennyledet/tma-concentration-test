@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Image } from 'rebass';
 import { Row, Col } from 'react-bootstrap';
 import { generatePhotoPlaceholderURL } from 'react-placeholder-image';
-// import './App.css';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -43,7 +42,6 @@ function App() {
   useEffect(() => {
     const newCards = getCards();
     setCards([...newCards]);
-    console.log(newCards);
   }, []);
 
   useEffect(() => {
@@ -53,8 +51,10 @@ function App() {
 
     async function update() {
         await sleep(500);
+
         setFirstMatch(null);
         setSecondMatch(null);
+
         if (cards[firstMatch].baseId === cards[secondMatch].baseId && !matches.includes(firstMatch)) {
           setMatches([...matches, firstMatch, secondMatch]);
 
@@ -72,11 +72,10 @@ function App() {
 
   }, [secondMatch, cards, firstMatch, matches, isFirstPlayer, firstPlayerScore, secondPlayerScore]);
 
-  useEffect(() => {
-    
-  }, [secondMatch]);
-
   const chooseCard = cardNum => {
+    if (firstMatch && secondMatch) {
+      return;
+    }
     if (!firstMatch) {
       setFirstMatch(cardNum);
     } else if (!secondMatch) {
@@ -104,7 +103,7 @@ function App() {
               {i === firstMatch || i === secondMatch || matches.includes(i) ? (
                 <Image src={card.image} />
               ) : (
-                <div style={{height: 150, width: 150, backgroundColor: 'aliceblue'}} onClick={() => chooseCard(i)}>{card.chosen}</div>
+                <div style={{height: 150, width: 150, backgroundColor: 'aliceblue'}} onClick={() =>  chooseCard(i)}>{card.chosen}</div>
               )}
             </Col>
           );
