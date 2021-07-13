@@ -1,3 +1,7 @@
+My thought process in implementing Concentration using React was to simply base all 20 cards in an array that was duped from a 10-card array and then subsequently shuffled. By making cards objects, we can make the matching comparisons simply by resolving to both cards' "baseId"
+
+- Kendrick Von Ledet
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
